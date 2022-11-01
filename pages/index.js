@@ -1,7 +1,9 @@
 import Head from 'next/head'
+import MainLayout from '../layouts/MainLayout'
 
 export default function Home() {
   return (
+    <MainLayout>
     <div>
       <Head>
         <title>Signin Page</title>
@@ -9,5 +11,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
     </div>
+    </MainLayout>
   )
 }

@@ -9,16 +9,8 @@ type usersState = {
   Users: User[];
 };
 
-function isThereUsersInLocalStorage() {
-  return localStorage.getItem("users") ? true  : false;
-}
-
-function getUsersFromLocalStorage() {
-  return JSON.parse(localStorage.getItem("users"));
-}
-
 const INITIAL_STATE: usersState = {
-  Users: isThereUsersInLocalStorage() ? getUsersFromLocalStorage() : [],
+  Users: [],
 };
 
 export const usersSlice = createSlice({
@@ -29,6 +21,8 @@ export const usersSlice = createSlice({
       const newUsers = action.payload;
 
       state.Users = newUsers;
+
+      localStorage.setItem("users", JSON.stringify(newUsers));
     },
   },
 });
