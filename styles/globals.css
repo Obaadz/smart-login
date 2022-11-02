@@ -1,10 +1,18 @@
 :root {
-	--spinner-color: 68, 80, 247;
-	--primary-color: #24353F;
-	--text-primary: #17a2b8;
+  --spinner-color: 68, 80, 247;
+  --primary-color: #24353f;
+  --text-primary: #17a2b8;
 }
 
 body {
-	background: var(--primary-color);
-	color: #fff;
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.hover\:text-white:hover {
+  color: #fff !important;
+}
+
+.hover\:text-underline:hover {
+  text-decoration: underline !important;
 }
