@@ -1,23 +1,21 @@
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { updateUsers } from '../redux/slice/usersSlice';
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { updateUsers } from "../redux/slice/usersSlice";
 
 function getUsersFromLocalStorage() {
   return localStorage.getItem("users");
 }
 
-const MainLayout = ({children}) => {
-	const dispatch = useDispatch();
+const MainLayout = ({ children }) => {
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const Users = getUsersFromLocalStorage() || [];
+    const Users = JSON.parse(getUsersFromLocalStorage()) || [];
 
-    dispatch(updateUsers(JSON.parse(Users)));
-  }, [])
+    dispatch(updateUsers(Users));
+  }, []);
 
-	return (
-		<>{children}</>
-	)
-}
+  return <>{children}</>;
+};
 
-export default MainLayout
+export default MainLayout;
