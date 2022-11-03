@@ -1,12 +1,19 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 import Container from "../components/Container";
 import Form from "../components/form/Form";
 import MainLayout from "../layouts/MainLayout";
+import { addUser } from "../redux/slice/usersSlice";
 
 export default function Register() {
-  function handleSubmit(e) {
+  const dispatch = useDispatch();
+
+  function handleSubmit(e, userData) {
     e.preventDefault();
+
+    if (userData.username.length > 0 && userData.password.length > 0)
+      dispatch(addUser(userData));
   }
 
   return (

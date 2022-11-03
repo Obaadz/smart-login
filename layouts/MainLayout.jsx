@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import { updateUsers } from "../redux/slice/usersSlice";
 
 function getUsersFromLocalStorage() {
-  return localStorage.getItem("users");
+  return JSON.parse(localStorage.getItem("users"));
 }
 
 const MainLayout = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const Users = JSON.parse(getUsersFromLocalStorage()) || [];
+    const Users = getUsersFromLocalStorage() || [];
 
     dispatch(updateUsers(Users));
   }, []);
