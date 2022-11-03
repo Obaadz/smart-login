@@ -37,7 +37,7 @@ export default function Home() {
           />
         </Form>
         <p>
-          Don't have an account?{" "}
+          Don{"'"}t have an account?{" "}
           <Link href="/register">
             <a className="link-light text-decoration-none hover:text-underline">
               Signup
