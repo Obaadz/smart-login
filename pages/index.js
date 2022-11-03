@@ -1,12 +1,23 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 import Container from "../components/Container";
 import Form from "../components/form/Form";
 import MainLayout from "../layouts/MainLayout";
+import { setCurrentUser } from "../redux/slice/usersSlice";
 
 export default function Home() {
-  function handleSubmit(e) {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  function handleSubmit(e, userData) {
     e.preventDefault();
+
+    if (isUserValid(userData)) {
+      dispatch(setCurrentUser(userData.username));
+      router.replace("/welcome");
+    }
   }
 
   return (
@@ -36,4 +47,18 @@ export default function Home() {
       </Container>
     </MainLayout>
   );
+}
+
+function getUsersFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("users"));
+}
+
+function isUserValid(userData) {
+  const Users = getUsersFromLocalStorage();
+
+  const targetUser = Users.find((user) => {
+    if (user.username === userData?.username) return user;
+  });
+
+  return userData?.password === targetUser?.password ? true : false;
 }

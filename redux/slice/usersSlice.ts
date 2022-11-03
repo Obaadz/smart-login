@@ -1,23 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type User = {
+export type User = {
   username: String;
   password: String;
 };
 
 type usersState = {
   Users: User[];
+  currentUser: String;
 };
 
 const INITIAL_STATE: usersState = {
   Users: [],
+  currentUser: "",
 };
 
 function getUsersFromLocalStorage() {
   return JSON.parse(localStorage.getItem("users"));
 }
 
-function isUserNameExist(username) {
+function isUserNameExist(username: String) {
   const Users: User[] = getUsersFromLocalStorage();
 
   const targetUser = Users.filter((user: User) => {
@@ -46,11 +48,16 @@ export const usersSlice = createSlice({
 
       localStorage.setItem("users", JSON.stringify(state.Users));
     },
+    setCurrentUser: (state, action: PayloadAction<String>) => {
+      const currentUser = action.payload;
+
+      state.currentUser = currentUser;
+    },
   },
 });
 
 const usersReducer = usersSlice.reducer;
 
-export const { updateUsers, addUser } = usersSlice.actions;
+export const { updateUsers, addUser, setCurrentUser } = usersSlice.actions;
 
 export default usersReducer;
